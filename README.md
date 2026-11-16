@@ -1,39 +1,118 @@
-# Product Recommendation System – Apriori and ECLAT
+# BERT-Based Multi-Class Sentiment Analysis
 
-A Python-based Product Recommendation System that applies **Association Rule Mining** techniques, using Apriori and ECLAT algorithms, to discover frequently co-purchased products and generate product recommendations from retail transaction data.
+A transformer-based sentiment classification project using **BERT (Bidirectional Encoder Representations from Transformers)** to classify textual data into three sentiment categories: Positive, Negative, and Neutral.
 
-The project implements market basket analysis to identify frequent itemsets and uncover relationships between products using Support, Confidence, and Lift metrics. It also compares the results of both algorithms to explore product associations and potential cross-selling opportunities.
+The project fine-tunes a pre-trained BERT model using PyTorch and Hugging Face Transformers, evaluates its performance on a held-out test dataset, and implements model saving, reloading, and inference on new text inputs.
 
 ## Key Features
-- **Data Preprocessing:** Cleansing, normalization, duplicate removal, and transaction grouping.
-- **Apriori Algorithm:** Identifies frequent itemsets using minimum support thresholds.
-- **ECLAT Algorithm:** Implements vertical transaction ID-based mining using set intersections.
-- **Association Rule Mining:** Generates product association rules using Support, Confidence, and Lift.
-- **Product Recommendations:** Recommends related products based on identified associations.
-- **Algorithm Comparison:** Compares frequent itemsets and generated association rules from both approaches.
-- **Data Visualization:** Visualizes top product association rules based on Lift.
+
+- **Text Preprocessing:** Tokenization and sequence preparation using the BERT tokenizer.
+- **Transfer Learning:** Fine-tuning the pre-trained `bert-base-uncased` model for multi-class sentiment classification.
+- **Multi-Class Classification:** Predicts Positive, Negative, and Neutral sentiments.
+- **Model Evaluation:** Evaluates performance using Accuracy, Precision, Recall, Macro F1-score, and Weighted F1-score.
+- **Baseline Comparison:** Compares BERT performance against a majority-class classification baseline.
+- **Confusion Matrix:** Visualizes classification performance across sentiment categories.
+- **Model Persistence:** Saves and reloads the fine-tuned model and tokenizer.
+- **Inference Pipeline:** Performs sentiment predictions on previously unseen text inputs.
 
 ## Dataset
-- **Source:** Groceries Dataset (Kaggle)
-- **Records:** 38,765
-- **Transactions:** 14,963
-- **Unique Products:** 167
-- **Preprocessing:** Missing-value handling, duplicate removal, product-name normalization, and transaction encoding.
 
-## Evaluation Results
+- **Dataset:** TweetEval – Sentiment
+- **Source:** Hugging Face Datasets
+- **Dataset Link:** [https://huggingface.co/datasets/cardiffnlp/tweet_eval](https://huggingface.co/datasets/cardiffnlp/tweet_eval)
+- **Task:** Three-class sentiment classification.
+- **Classes:** Negative, Neutral, Positive.
+- **Splits:** Training, Validation, and Testing.
 
-| Metric | Apriori | ECLAT |
-|---|---:|---:|
-| Frequent Itemsets | 750 | 750 |
-| Association Rules | 37 | 37 |
+The dataset is loaded directly using the Hugging Face Datasets library.
 
-**Thresholds:**
-- Minimum Support: 0.001 (0.1%)
-- Minimum Confidence: 0.10 (10%)
-- Minimum Lift: 1.0
+## Model Architecture
+
+- **Base Model:** BERT Base Uncased
+- **Model:** `bert-base-uncased`
+- **Framework:** PyTorch
+- **Pre-trained Model Library:** Hugging Face Transformers
+- **Task:** Sequence Classification
+- **Output:** Three sentiment classes.
+
+## Evaluation Metrics
+
+The model is evaluated using:
+
+- Accuracy
+- Macro Precision
+- Macro Recall
+- Macro F1-score
+- Weighted Precision
+- Weighted Recall
+- Weighted F1-score
+
+A majority-class baseline is also implemented to establish a reference for evaluating model performance.
+
+Actual evaluation results are generated after model training and saved in `outputs/metrics.json`.
 
 ## Technologies Used
-Python, Pandas, NumPy, Matplotlib, MLxtend, Jupyter Notebook.
+
+Python, PyTorch, Hugging Face Transformers, Hugging Face Datasets, Scikit-learn, NumPy, Matplotlib, Seaborn.
+
+## Project Structure
+
+```text
+BERT-Sentiment-Analysis/
+│
+├── models/
+├── outputs/
+├── src/
+│   ├── train.py
+│   └── predict.py
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone YOUR_REPOSITORY_URL
+cd BERT-Sentiment-Analysis
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Training
+
+Run the training script:
+
+```bash
+python src/train.py
+```
+
+The script automatically:
+
+1. Loads the TweetEval sentiment dataset.
+2. Tokenizes text using the BERT tokenizer.
+3. Fine-tunes the pre-trained BERT model.
+4. Evaluates the model on validation and test sets.
+5. Generates evaluation metrics and a confusion matrix.
+6. Saves the fine-tuned model and tokenizer.
+
+## Inference
+
+After training, run:
+
+```bash
+python src/predict.py
+```
+
+Enter text to obtain its predicted sentiment and confidence score.
 
 ## Project Objective
-To explore association-rule-based recommendation techniques, understand purchasing patterns, and derive actionable product-placement and cross-selling insights from retail transaction data.
+
+To explore transformer-based natural language processing and apply transfer learning for multi-class sentiment analysis, while developing a complete pipeline covering model fine-tuning, evaluation, persistence, and inference.
