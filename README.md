@@ -55,21 +55,6 @@ Actual evaluation results are generated after model training and saved in `outpu
 
 Python, PyTorch, Hugging Face Transformers, Hugging Face Datasets, Scikit-learn, NumPy, Matplotlib, Seaborn.
 
-## Project Structure
-
-```text
-BERT-Sentiment-Analysis/
-│
-├── models/
-├── outputs/
-├── src/
-│   ├── train.py
-│   └── predict.py
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
 
 ## Installation
 
